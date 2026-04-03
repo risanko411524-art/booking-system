@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
         body: JSON.stringify({ password }),
       });
       if (!res.ok) { const data = await res.json(); setError(data.error || "ログインに失敗しました"); return; }
-      router.push("/admin");
+      window.location.href = "/admin";
     } catch { setError("ログインに失敗しました"); } finally { setLoading(false); }
   }
 
