@@ -12,7 +12,10 @@ export default async function AdminSlotsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>予約枠管理</h1>
+        <div className="flex items-center gap-3">
+          <span className="text-3xl">&#128197;</span>
+          <h1 className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>予約枠管理</h1>
+        </div>
         <Link href="/admin/slots/new"
           className="rounded-full px-5 py-2.5 text-sm font-extrabold shadow-md transition-all hover:scale-105"
           style={{ background: "var(--gradient)", color: "#ffffff" }}>

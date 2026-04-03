@@ -61,7 +61,11 @@ export default function MyBookingsPage() {
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-xl font-extrabold mb-6" style={{ color: "var(--text)" }}>予約確認</h2>
+      <div className="text-center mb-6">
+        <div className="text-5xl mb-2">&#128270;&#128203;</div>
+        <h2 className="text-xl font-extrabold" style={{ color: "var(--text)" }}>予約確認</h2>
+        <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>メールアドレスで予約状況を確認できます</p>
+      </div>
 
       <form onSubmit={handleSearch} className="flex gap-2 mb-6">
         <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}

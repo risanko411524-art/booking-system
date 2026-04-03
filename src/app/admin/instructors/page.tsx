@@ -42,7 +42,10 @@ export default function InstructorsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold mb-6" style={{ color: "var(--text)" }}>講師管理</h1>
+      <div className="flex items-center gap-3 mb-6">
+        <span className="text-3xl">&#128105;&#8205;&#127979;</span>
+        <h1 className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>講師管理</h1>
+      </div>
 
       <div className="bg-white rounded-2xl p-5 mb-6 shadow-md" style={{ border: "3px solid var(--border)" }}>
         <h2 className="font-extrabold mb-3" style={{ color: "var(--text)" }}>新規講師登録</h2>

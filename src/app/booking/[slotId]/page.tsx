@@ -15,12 +15,9 @@ export default async function BookingFormPage({
   if (!slot) {
     return (
       <div className="text-center py-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-2">
-          枠が見つかりません
-        </h2>
-        <Link href="/booking" className="text-blue-600 hover:underline">
-          予約枠一覧に戻る
-        </Link>
+        <div className="text-5xl mb-4">&#128533;</div>
+        <h2 className="text-xl font-extrabold mb-2" style={{ color: "var(--text)" }}>枠が見つかりません</h2>
+        <Link href="/booking" className="font-bold hover:underline" style={{ color: "var(--primary)" }}>予約枠一覧に戻る</Link>
       </div>
     );
   }
@@ -31,19 +28,22 @@ export default async function BookingFormPage({
   if (isFull || isPast) {
     return (
       <div className="text-center py-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-2">
+        <div className="text-5xl mb-4">{isPast ? "&#9203;" : "&#128532;"}</div>
+        <h2 className="text-xl font-extrabold mb-2" style={{ color: "var(--text)" }}>
           {isPast ? "この枠は既に終了しています" : "この枠は満席です"}
         </h2>
-        <Link href="/booking" className="text-blue-600 hover:underline">
-          予約枠一覧に戻る
-        </Link>
+        <Link href="/booking" className="font-bold hover:underline" style={{ color: "var(--primary)" }}>予約枠一覧に戻る</Link>
       </div>
     );
   }
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-xl font-bold text-gray-900 mb-6">予約フォーム</h2>
+      <div className="text-center mb-6">
+        <div className="text-5xl mb-2">&#9997;&#65039;</div>
+        <h2 className="text-xl font-extrabold" style={{ color: "var(--text)" }}>予約フォーム</h2>
+        <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>以下を入力して予約を確定してください</p>
+      </div>
       <BookingForm slot={slot} />
     </div>
   );

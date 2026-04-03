@@ -22,7 +22,10 @@ export default async function SlotBookingsPage({
 
       {slot ? (
         <div className="mb-6">
-          <h1 className="text-2xl font-extrabold mb-2" style={{ color: "var(--text)" }}>予約者一覧</h1>
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-3xl">&#128101;</span>
+            <h1 className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>予約者一覧</h1>
+          </div>
           <p className="font-bold" style={{ color: "var(--text-muted)" }}>
             {(() => { const date = new Date(slot.date + "T00:00:00"); return `${date.getMonth() + 1}/${date.getDate()}(${days[date.getDay()]})`; })()}
             {" "}{slot.start_time}〜{slot.end_time} / {slot.instructor_name}
@@ -32,7 +35,10 @@ export default async function SlotBookingsPage({
           </p>
         </div>
       ) : (
-        <h1 className="text-2xl font-extrabold mb-6" style={{ color: "var(--text)" }}>予約者一覧</h1>
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-3xl">&#128101;</span>
+          <h1 className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>予約者一覧</h1>
+        </div>
       )}
 
       {activeBookings.length === 0 ? (

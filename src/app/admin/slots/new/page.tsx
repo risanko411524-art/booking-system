@@ -41,7 +41,10 @@ export default function NewSlotPage() {
 
   return (
     <div className="max-w-lg">
-      <h1 className="text-2xl font-extrabold mb-6" style={{ color: "var(--text)" }}>新規枠作成</h1>
+      <div className="flex items-center gap-3 mb-6">
+        <span className="text-3xl">&#10133;</span>
+        <h1 className="text-2xl font-extrabold" style={{ color: "var(--text)" }}>新規枠作成</h1>
+      </div>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-extrabold mb-1" style={{ color: "var(--text)" }}>日付</label>
