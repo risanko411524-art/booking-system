@@ -24,9 +24,9 @@ export default function BookingForm({ slot }: { slot: Slot }) {
         body: JSON.stringify({ slot_id: slot.slot_id, email, name, room_name: roomName }),
       });
       const data = await res.json();
-      if (!res.ok) { setError(data.error || "予約に失敗しました"); return; }
-      router.push(`/booking/complete/${data.booking.booking_id}`);
-    } catch { setError("予約に失敗しました。もう一度お試しください。"); } finally { setSubmitting(false); }
+      if (!res.ok) { setError(data.error || "予約に失敗しました"); setSubmitting(false); return; }
+      window.location.href = `/booking/complete/${data.booking.booking_id}`;
+    } catch { setError("予約に失敗しました。もう一度お試しください。"); setSubmitting(false); }
   }
 
   const days = ["日", "月", "火", "水", "木", "金", "土"];
