@@ -107,6 +107,12 @@ export default function MyBookingsPage() {
                           {formatDate(slot.date)} {slot.start_time}〜{slot.end_time}
                         </p>
                         <p className="text-sm font-bold" style={{ color: "var(--text-muted)" }}>担当: {slot.instructor_name}</p>
+                        {booking.status === "active" && slot.zoom_link && (
+                          <a href={slot.zoom_link} target="_blank" rel="noopener noreferrer"
+                            className="inline-block text-sm font-bold mt-1 hover:underline" style={{ color: "var(--primary)" }}>
+                            Zoomリンク
+                          </a>
+                        )}
                       </>
                     ) : (
                       <p className="font-bold" style={{ color: "var(--text-muted)" }}>枠情報なし</p>
