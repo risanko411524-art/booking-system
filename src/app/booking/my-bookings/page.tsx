@@ -107,12 +107,6 @@ export default function MyBookingsPage() {
                           {formatDate(slot.date)} {slot.start_time}〜{slot.end_time}
                         </p>
                         <p className="text-sm font-bold" style={{ color: "var(--text-muted)" }}>担当: {slot.instructor_name}</p>
-                        {booking.status === "active" && slot.zoom_link && (
-                          <a href={slot.zoom_link} target="_blank" rel="noopener noreferrer"
-                            className="inline-block text-sm font-bold mt-1 hover:underline" style={{ color: "var(--primary)" }}>
-                            Zoomリンク
-                          </a>
-                        )}
                       </>
                     ) : (
                       <p className="font-bold" style={{ color: "var(--text-muted)" }}>枠情報なし</p>
@@ -126,10 +120,18 @@ export default function MyBookingsPage() {
                     {booking.status === "active" ? "予約済" : "キャンセル済"}
                   </span>
                 </div>
+                {booking.status === "active" && slot?.zoom_link && (
+                  <a href={slot.zoom_link} target="_blank" rel="noopener noreferrer"
+                    className="block text-center font-extrabold rounded-full py-2.5 mt-3 shadow-md transition-all hover:scale-105"
+                    style={{ background: "var(--gradient)", color: "#ffffff" }}>
+                    ここから参加する
+                  </a>
+                )}
                 {canCancel && (
                   <button onClick={() => handleCancel(booking.booking_id)}
                     disabled={cancellingId === booking.booking_id}
-                    className="text-sm font-bold disabled:opacity-50" style={{ color: "#c62828" }}>
+                    className="block w-full text-center font-bold rounded-full py-2 mt-2 disabled:opacity-50 transition-all"
+                    style={{ background: "#ffcdd2", color: "#c62828", border: "2px solid #ef9a9a" }}>
                     {cancellingId === booking.booking_id ? "キャンセル中..." : "この予約をキャンセル"}
                   </button>
                 )}
