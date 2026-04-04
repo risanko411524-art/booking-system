@@ -99,7 +99,7 @@ export default function MyBookingsPage() {
           {bookings.map((booking) => {
             const slot = booking.slot;
             const canCancel = booking.status === "active" && slot &&
-              new Date(`${slot.date}T${slot.start_time}:00`).getTime() - Date.now() > 3 * 60 * 60 * 1000;
+              new Date(`${slot.date}T00:00:00`).getTime() > Date.now();
             return (
               <div key={booking.booking_id} className="rounded-2xl p-4 bg-white shadow-md"
                 style={{ border: "3px solid var(--border)", opacity: booking.status === "cancelled" ? 0.55 : 1 }}>

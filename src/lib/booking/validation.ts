@@ -36,10 +36,10 @@ export function canCancelBooking(slot: Slot): {
   reason?: string;
 } {
   const now = new Date();
-  const slotStart = new Date(`${slot.date}T${slot.start_time}:00`);
-  const threeHoursBefore = new Date(slotStart.getTime() - 3 * 60 * 60 * 1000);
-  if (now >= threeHoursBefore) {
-    return { ok: false, reason: "キャンセルは開始3時間前までです" };
+  // 開催日の前日24時（= 開催日の0:00）以降はキャンセル不可
+  const slotDay = new Date(`${slot.date}T00:00:00`);
+  if (now >= slotDay) {
+    return { ok: false, reason: "キャンセルは前日までです" };
   }
   return { ok: true };
 }
