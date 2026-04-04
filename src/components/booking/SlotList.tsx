@@ -49,8 +49,10 @@ export default function SlotList({
 
   const [year, month] = yearMonth.split("-").map(Number);
 
-  const week2Slots = slots.filter((s) => s.period === "week2").sort((a, b) => a.date.localeCompare(b.date) || a.start_time.localeCompare(b.start_time));
-  const week4Slots = slots.filter((s) => s.period === "week4").sort((a, b) => a.date.localeCompare(b.date) || a.start_time.localeCompare(b.start_time));
+  const now = new Date();
+  const futureSlots = slots.filter((s) => new Date(`${s.date}T${s.start_time}:00`) > now);
+  const week2Slots = futureSlots.filter((s) => s.period === "week2").sort((a, b) => a.date.localeCompare(b.date) || a.start_time.localeCompare(b.start_time));
+  const week4Slots = futureSlots.filter((s) => s.period === "week4").sort((a, b) => a.date.localeCompare(b.date) || a.start_time.localeCompare(b.start_time));
 
   return (
     <div>
