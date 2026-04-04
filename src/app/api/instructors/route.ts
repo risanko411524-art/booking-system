@@ -22,13 +22,13 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { name, zoom_link } = body;
+    const { name, zoom_link, zoom_id, zoom_passcode } = body;
 
     if (!name || !zoom_link) {
       return NextResponse.json({ error: "名前とZoomリンクは必須です" }, { status: 400 });
     }
 
-    const instructor = await sheetsClient.addInstructor({ name, zoom_link });
+    const instructor = await sheetsClient.addInstructor({ name, zoom_link, zoom_id: zoom_id || "", zoom_passcode: zoom_passcode || "" });
     return NextResponse.json({ instructor });
   } catch (error) {
     const message = error instanceof Error ? error.message : "エラーが発生しました";
