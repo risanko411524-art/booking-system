@@ -139,8 +139,8 @@ export default function EditSlotPage({
             onChange={(e) => setPeriod(e.target.value as "week2" | "week4")}
             className="w-full border border-gray-300 rounded-lg px-3 py-2"
           >
-            <option value="week2">第2週</option>
-            <option value="week4">第4週</option>
+            <option value="week2">1回目</option>
+            <option value="week4">2回目</option>
           </select>
         </div>
 

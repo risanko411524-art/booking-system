@@ -45,7 +45,7 @@ export default function SlotAdminList({ initialSlots }: { initialSlots: Slot[] }
               <td className="px-3 py-3">{slot.start_time}〜{slot.end_time}</td>
               <td className="px-3 py-3">
                 <span className="text-xs font-extrabold px-2 py-1 rounded-full" style={{ background: "var(--primary)", color: "#ffffff" }}>
-                  {slot.period === "week2" ? "第2週" : "第4週"}
+                  {slot.period === "week2" ? "1回目" : "2回目"}
                 </span>
               </td>
               <td className="px-3 py-3 font-bold">{slot.instructor_name}</td>

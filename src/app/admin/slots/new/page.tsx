@@ -63,8 +63,8 @@ export default function NewSlotPage() {
         <div>
           <label className="block text-sm font-extrabold mb-1" style={{ color: "var(--text)" }}>期</label>
           <select value={period} onChange={(e) => setPeriod(e.target.value as "week2" | "week4")} className={inputCls} style={inputStyle}>
-            <option value="week2">第2週</option>
-            <option value="week4">第4週</option>
+            <option value="week2">1回目</option>
+            <option value="week4">2回目</option>
           </select>
         </div>
         <div>

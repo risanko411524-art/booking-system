@@ -63,7 +63,7 @@ export default function Home() {
               <div className="text-5xl mb-4">&#128218;</div>
               <h3 className="font-extrabold text-lg mb-2" style={{ color: "var(--text)" }}>隔週開催</h3>
               <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-                第2週・第4週に開催。継続的に学び、実践を繰り返すことで成長を実感。
+                月2回開催。継続的に学び、実践を繰り返すことで成長を実感。
               </p>
             </div>
             {/* Feature 3 */}

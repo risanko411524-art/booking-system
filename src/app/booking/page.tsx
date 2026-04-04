@@ -20,7 +20,7 @@ export default async function BookingPage() {
       <div className="text-center mb-8 rounded-2xl p-6 shadow-sm" style={{ background: "var(--bg2)", border: "2px solid var(--border)" }}>
         <div className="text-5xl mb-3">&#128197;&#128101;&#9989;</div>
         <h2 className="text-xl font-extrabold" style={{ color: "var(--text)" }}>予約枠を選んで参加しよう！</h2>
-        <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>各期（第2週・第4週）から1枠ずつ予約できます</p>
+        <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>1回目・2回目からそれぞれ1枠ずつ予約できます</p>
       </div>
       <SlotList initialSlots={slots} initialYearMonth={yearMonth} />
     </div>

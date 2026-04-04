@@ -75,8 +75,8 @@ export default function SlotList({
       ) : (
         <div className="space-y-8">
           {[
-            { label: "第2週", slots: week2Slots },
-            { label: "第4週", slots: week4Slots },
+            { label: "1回目", slots: week2Slots },
+            { label: "2回目", slots: week4Slots },
           ].map(
             ({ label, slots: periodSlots }) =>
               periodSlots.length > 0 && (
