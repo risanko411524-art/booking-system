@@ -130,7 +130,10 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-6 px-6 text-center" style={{ background: "#1B3A1B" }}>
+      <footer className="py-6 px-6 text-center flex justify-center gap-6" style={{ background: "#1B3A1B" }}>
+        <Link href="/booking/help" className="text-sm hover:underline" style={{ color: "rgba(255,255,255,0.7)" }}>
+          ヘルプ
+        </Link>
         <Link href="/admin" className="text-sm hover:underline" style={{ color: "rgba(255,255,255,0.5)" }}>
           管理者ログイン
         </Link>
