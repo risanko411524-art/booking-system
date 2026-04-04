@@ -74,6 +74,10 @@ export default async function BookingCompletePage({
           style={{ background: "var(--gradient)", color: "#ffffff" }}>予約枠一覧に戻る</Link>
         <Link href="/booking/my-bookings" className="block text-sm font-bold hover:underline" style={{ color: "var(--primary)" }}>予約一覧を確認する</Link>
       </div>
+
+      <div className="mt-6 rounded-xl p-4 text-sm" style={{ background: "var(--accent-light)", border: "2px solid var(--accent)" }}>
+        <p className="font-bold" style={{ color: "var(--text)" }}>参加Zoomリンク等は、<Link href="/booking/my-bookings" className="font-extrabold hover:underline" style={{ color: "var(--primary)" }}>予約確認</Link>ボタンから再度確認できます</p>
+      </div>
     </div>
   );
 }
