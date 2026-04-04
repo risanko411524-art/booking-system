@@ -135,9 +135,10 @@ export default function Home() {
                   <span>「予約確認」ページからいつでもキャンセルできます</span>
                 </li>
               </ul>
-              <div className="mt-4 rounded-xl p-3 text-sm" style={{ background: "rgba(255,255,255,0.7)", border: "2px solid var(--border)" }}>
-                <p style={{ color: "var(--text-muted)" }}>※ 基本的に当日キャンセルはNGですが、やむを得ず当日欠席される場合は、<strong className="font-extrabold" style={{ color: "var(--text)" }}>少人数オプチャ</strong>にてお早めにご連絡ください。</p>
-              </div>
+                <li className="flex items-start gap-2">
+                  <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
+                  <span>基本的に当日キャンセルはNGですが、やむを得ず当日欠席される場合は<strong className="font-extrabold" style={{ color: "var(--text)" }}>少人数オプチャ</strong>にてお早めにご連絡ください</span>
+                </li>
             </div>
           </div>
 
