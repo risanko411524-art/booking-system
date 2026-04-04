@@ -85,12 +85,13 @@ export default function Home() {
             予約の
             <span style={{ color: "var(--primary)" }}>流れ</span>
           </h2>
-          <div className="grid gap-6 sm:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-5">
             {[
               { step: "1", icon: "&#128197;", title: "枠を選ぶ", desc: "空いている日時を選択" },
               { step: "2", icon: "&#9997;", title: "情報を入力", desc: "名前・メール・部屋名" },
               { step: "3", icon: "&#9989;", title: "予約完了", desc: "Zoomリンクを受け取る" },
-              { step: "4", icon: "&#127912;", title: "参加！", desc: "当日Zoomで参加" },
+              { step: "4", icon: "&#128187;", title: "参加！", desc: "当日Zoomで参加" },
+              { step: "5", icon: "&#128221;", title: "アンケート回答", desc: "参加後にアンケートに回答" },
             ].map(({ step, icon, title, desc }) => (
               <div key={step} className="text-center">
                 <div
