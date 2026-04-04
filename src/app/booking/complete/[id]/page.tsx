@@ -52,6 +52,16 @@ export default async function BookingCompletePage({
             <a href={slot.zoom_link} target="_blank" rel="noopener noreferrer"
               className="font-bold hover:underline break-all" style={{ color: "var(--primary)" }}>{slot.zoom_link}</a>
           </div>
+          {(slot.zoom_id || slot.zoom_passcode) && (
+            <div className="rounded-xl p-3" style={{ background: "var(--accent-light)", border: "2px solid var(--accent)" }}>
+              {slot.zoom_id && (
+                <p className="font-bold" style={{ color: "var(--text)" }}>Zoom ID: <span className="font-extrabold">{slot.zoom_id}</span></p>
+              )}
+              {slot.zoom_passcode && (
+                <p className="font-bold" style={{ color: "var(--text)" }}>パスコード: <span className="font-extrabold">{slot.zoom_passcode}</span></p>
+              )}
+            </div>
+          )}
           <div>
             <p className="text-sm font-bold" style={{ color: "var(--text-muted)" }}>予約者</p>
             <p className="font-bold" style={{ color: "var(--text)" }}>{booking.name}（{booking.room_name}）</p>

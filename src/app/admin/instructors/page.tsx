@@ -7,9 +7,13 @@ export default function InstructorsPage() {
   const [instructors, setInstructors] = useState<Instructor[]>([]);
   const [name, setName] = useState("");
   const [zoomLink, setZoomLink] = useState("");
+  const [zoomId, setZoomId] = useState("");
+  const [zoomPasscode, setZoomPasscode] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState("");
   const [editZoomLink, setEditZoomLink] = useState("");
+  const [editZoomId, setEditZoomId] = useState("");
+  const [editZoomPasscode, setEditZoomPasscode] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -22,16 +26,19 @@ export default function InstructorsPage() {
   async function handleAdd(e: React.FormEvent) {
     e.preventDefault(); setError(""); setSubmitting(true);
     try {
-      const res = await fetch("/api/instructors", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, zoom_link: zoomLink }) });
+      const res = await fetch("/api/instructors", { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, zoom_link: zoomLink, zoom_id: zoomId, zoom_passcode: zoomPasscode }) });
       if (!res.ok) { const d = await res.json(); setError(d.error || "登録に失敗しました"); return; }
-      setName(""); setZoomLink(""); await fetchInstructors();
+      setName(""); setZoomLink(""); setZoomId(""); setZoomPasscode("");
+      await fetchInstructors();
     } catch { setError("登録に失敗しました"); } finally { setSubmitting(false); }
   }
 
   async function handleUpdate(instructorId: string) {
     setError("");
     try {
-      const res = await fetch(`/api/instructors/${instructorId}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: editName, zoom_link: editZoomLink }) });
+      const res = await fetch(`/api/instructors/${instructorId}`, { method: "PUT", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: editName, zoom_link: editZoomLink, zoom_id: editZoomId, zoom_passcode: editZoomPasscode }) });
       if (!res.ok) { const d = await res.json(); setError(d.error || "更新に失敗しました"); return; }
       setEditingId(null); await fetchInstructors();
     } catch { setError("更新に失敗しました"); }
@@ -49,13 +56,21 @@ export default function InstructorsPage() {
 
       <div className="bg-white rounded-2xl p-5 mb-6 shadow-md" style={{ border: "3px solid var(--border)" }}>
         <h2 className="font-extrabold mb-3" style={{ color: "var(--text)" }}>新規講師登録</h2>
-        <form onSubmit={handleAdd} className="flex flex-col sm:flex-row gap-2">
-          <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="講師名"
-            className={`${inputCls} flex-1`} style={inputStyle} />
-          <input type="url" required value={zoomLink} onChange={(e) => setZoomLink(e.target.value)} placeholder="ZoomリンクURL"
-            className={`${inputCls} flex-[2]`} style={inputStyle} />
+        <form onSubmit={handleAdd} className="space-y-3">
+          <div className="flex flex-col sm:flex-row gap-2">
+            <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="講師名"
+              className={`${inputCls} flex-1`} style={inputStyle} />
+            <input type="url" required value={zoomLink} onChange={(e) => setZoomLink(e.target.value)} placeholder="ZoomリンクURL"
+              className={`${inputCls} flex-[2]`} style={inputStyle} />
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <input type="text" value={zoomId} onChange={(e) => setZoomId(e.target.value)} placeholder="Zoom ID（例: 123 456 7890）"
+              className={`${inputCls} flex-1`} style={inputStyle} />
+            <input type="text" value={zoomPasscode} onChange={(e) => setZoomPasscode(e.target.value)} placeholder="パスコード（例: abc123）"
+              className={`${inputCls} flex-1`} style={inputStyle} />
+          </div>
           <button type="submit" disabled={submitting}
-            className="rounded-full px-5 py-3 font-extrabold disabled:opacity-50 whitespace-nowrap shadow-md"
+            className="rounded-full px-5 py-3 font-extrabold disabled:opacity-50 shadow-md"
             style={{ background: "var(--primary)", color: "#ffffff" }}>
             {submitting ? "登録中..." : "登録"}
           </button>
@@ -71,11 +86,19 @@ export default function InstructorsPage() {
           {instructors.map((inst) => (
             <div key={inst.instructor_id} className="bg-white rounded-2xl p-4 shadow-md" style={{ border: "3px solid var(--border)" }}>
               {editingId === inst.instructor_id ? (
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)}
-                    className={`${inputCls} flex-1`} style={inputStyle} />
-                  <input type="url" value={editZoomLink} onChange={(e) => setEditZoomLink(e.target.value)}
-                    className={`${inputCls} flex-[2]`} style={inputStyle} />
+                <div className="space-y-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)}
+                      className={`${inputCls} flex-1`} style={inputStyle} />
+                    <input type="url" value={editZoomLink} onChange={(e) => setEditZoomLink(e.target.value)}
+                      className={`${inputCls} flex-[2]`} style={inputStyle} />
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <input type="text" value={editZoomId} onChange={(e) => setEditZoomId(e.target.value)} placeholder="Zoom ID"
+                      className={`${inputCls} flex-1`} style={inputStyle} />
+                    <input type="text" value={editZoomPasscode} onChange={(e) => setEditZoomPasscode(e.target.value)} placeholder="パスコード"
+                      className={`${inputCls} flex-1`} style={inputStyle} />
+                  </div>
                   <div className="flex gap-1">
                     <button onClick={() => handleUpdate(inst.instructor_id)}
                       className="rounded-full px-4 py-2 text-sm font-extrabold shadow-md" style={{ background: "var(--primary)", color: "#ffffff" }}>保存</button>
@@ -88,8 +111,15 @@ export default function InstructorsPage() {
                   <div>
                     <p className="font-extrabold" style={{ color: "var(--text)" }}>{inst.name}</p>
                     <p className="text-sm break-all" style={{ color: "var(--text-muted)" }}>{inst.zoom_link}</p>
+                    {(inst.zoom_id || inst.zoom_passcode) && (
+                      <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                        {inst.zoom_id && <>ID: {inst.zoom_id}</>}
+                        {inst.zoom_id && inst.zoom_passcode && <> / </>}
+                        {inst.zoom_passcode && <>パスコード: {inst.zoom_passcode}</>}
+                      </p>
+                    )}
                   </div>
-                  <button onClick={() => { setEditingId(inst.instructor_id); setEditName(inst.name); setEditZoomLink(inst.zoom_link); }}
+                  <button onClick={() => { setEditingId(inst.instructor_id); setEditName(inst.name); setEditZoomLink(inst.zoom_link); setEditZoomId(inst.zoom_id || ''); setEditZoomPasscode(inst.zoom_passcode || ''); }}
                     className="text-sm font-bold hover:underline" style={{ color: "var(--primary)" }}>編集</button>
                 </div>
               )}

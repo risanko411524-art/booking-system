@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { date, start_time, end_time, instructor_name, zoom_link, period, max_capacity } = body;
+    const { date, start_time, end_time, instructor_name, zoom_link, zoom_id, zoom_passcode, period, max_capacity } = body;
 
     if (!date || !start_time || !end_time || !instructor_name || !zoom_link || !period) {
       return NextResponse.json({ error: "必須項目が不足しています" }, { status: 400 });
@@ -36,6 +36,8 @@ export async function POST(request: NextRequest) {
       end_time,
       instructor_name,
       zoom_link,
+      zoom_id: zoom_id || "",
+      zoom_passcode: zoom_passcode || "",
       period,
       max_capacity: max_capacity || 12,
     });

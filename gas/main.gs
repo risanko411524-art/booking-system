@@ -133,10 +133,12 @@ function parseSlotRow(row) {
     end_time: toTimeStr(row[3]),
     instructor_name: String(row[4]),
     zoom_link: String(row[5]),
-    year_month: toYearMonthStr(row[6]),
-    period: String(row[7]),
-    max_capacity: Number(row[8]),
-    current_count: Number(row[9])
+    zoom_id: String(row[6] || ''),
+    zoom_passcode: String(row[7] || ''),
+    year_month: toYearMonthStr(row[8]),
+    period: String(row[9]),
+    max_capacity: Number(row[10]),
+    current_count: Number(row[11])
   };
 }
 
@@ -170,7 +172,7 @@ function addSlot(data) {
 
   // 書式を書式なしテキストに設定してから値を入れる
   var lastRow = sheet.getLastRow() + 1;
-  var range = sheet.getRange(lastRow, 1, 1, 10);
+  var range = sheet.getRange(lastRow, 1, 1, 12);
   range.setNumberFormat('@'); // テキスト形式
   range.setValues([[
     slotId,
@@ -179,6 +181,8 @@ function addSlot(data) {
     data.end_time,
     data.instructor_name,
     data.zoom_link,
+    data.zoom_id || '',
+    data.zoom_passcode || '',
     yearMonth,
     data.period,
     String(maxCapacity),
@@ -193,6 +197,8 @@ function addSlot(data) {
       end_time: data.end_time,
       instructor_name: data.instructor_name,
       zoom_link: data.zoom_link,
+      zoom_id: data.zoom_id || '',
+      zoom_passcode: data.zoom_passcode || '',
       year_month: yearMonth,
       period: data.period,
       max_capacity: maxCapacity,
@@ -213,11 +219,13 @@ function updateSlot(slotId, data) {
       if (data.end_time !== undefined) { sheet.getRange(row, 4).setNumberFormat('@').setValue(data.end_time); }
       if (data.instructor_name !== undefined) { sheet.getRange(row, 5).setValue(data.instructor_name); }
       if (data.zoom_link !== undefined) { sheet.getRange(row, 6).setValue(data.zoom_link); }
-      if (data.date !== undefined) { sheet.getRange(row, 7).setNumberFormat('@').setValue(data.date.slice(0, 7)); }
-      if (data.period !== undefined) { sheet.getRange(row, 8).setValue(data.period); }
-      if (data.max_capacity !== undefined) { sheet.getRange(row, 9).setValue(data.max_capacity); }
+      if (data.zoom_id !== undefined) { sheet.getRange(row, 7).setNumberFormat('@').setValue(data.zoom_id); }
+      if (data.zoom_passcode !== undefined) { sheet.getRange(row, 8).setNumberFormat('@').setValue(data.zoom_passcode); }
+      if (data.date !== undefined) { sheet.getRange(row, 9).setNumberFormat('@').setValue(data.date.slice(0, 7)); }
+      if (data.period !== undefined) { sheet.getRange(row, 10).setValue(data.period); }
+      if (data.max_capacity !== undefined) { sheet.getRange(row, 11).setValue(data.max_capacity); }
 
-      var updated = sheet.getRange(row, 1, 1, 10).getDisplayValues()[0];
+      var updated = sheet.getRange(row, 1, 1, 12).getDisplayValues()[0];
       return { slot: parseSlotRow(updated) };
     }
   }
@@ -367,9 +375,9 @@ function updateSlotCount(slotId, delta) {
 
   for (var i = 0; i < rows.length; i++) {
     if (String(rows[i][0]) === slotId) {
-      var currentCount = Number(rows[i][9]) + delta;
+      var currentCount = Number(rows[i][11]) + delta;
       if (currentCount < 0) currentCount = 0;
-      sheet.getRange(i + 2, 10).setValue(currentCount);
+      sheet.getRange(i + 2, 12).setValue(currentCount);
       return;
     }
   }
@@ -384,7 +392,9 @@ function getInstructors() {
     return {
       instructor_id: String(row[0]),
       name: String(row[1]),
-      zoom_link: String(row[2])
+      zoom_link: String(row[2]),
+      zoom_id: String(row[3] || ''),
+      zoom_passcode: String(row[4] || '')
     };
   });
 
@@ -396,15 +406,17 @@ function addInstructor(data) {
   var instructorId = generateId('inst');
 
   var lastRow = sheet.getLastRow() + 1;
-  var range = sheet.getRange(lastRow, 1, 1, 3);
+  var range = sheet.getRange(lastRow, 1, 1, 5);
   range.setNumberFormat('@');
-  range.setValues([[instructorId, data.name, data.zoom_link]]);
+  range.setValues([[instructorId, data.name, data.zoom_link, data.zoom_id || '', data.zoom_passcode || '']]);
 
   return {
     instructor: {
       instructor_id: instructorId,
       name: data.name,
-      zoom_link: data.zoom_link
+      zoom_link: data.zoom_link,
+      zoom_id: data.zoom_id || '',
+      zoom_passcode: data.zoom_passcode || ''
     }
   };
 }
@@ -418,13 +430,17 @@ function updateInstructor(instructorId, data) {
       var row = i + 2;
       if (data.name !== undefined) sheet.getRange(row, 2).setValue(data.name);
       if (data.zoom_link !== undefined) sheet.getRange(row, 3).setValue(data.zoom_link);
+      if (data.zoom_id !== undefined) sheet.getRange(row, 4).setNumberFormat('@').setValue(data.zoom_id);
+      if (data.zoom_passcode !== undefined) sheet.getRange(row, 5).setNumberFormat('@').setValue(data.zoom_passcode);
 
-      var updated = sheet.getRange(row, 1, 1, 3).getDisplayValues()[0];
+      var updated = sheet.getRange(row, 1, 1, 5).getDisplayValues()[0];
       return {
         instructor: {
           instructor_id: String(updated[0]),
           name: String(updated[1]),
-          zoom_link: String(updated[2])
+          zoom_link: String(updated[2]),
+          zoom_id: String(updated[3] || ''),
+          zoom_passcode: String(updated[4] || '')
         }
       };
     }
@@ -439,9 +455,9 @@ function setupSheets() {
 
   var slots = ss.getSheetByName('slots');
   if (!slots) { slots = ss.insertSheet('slots'); }
-  slots.getRange(1, 1, 1, 10).setValues([[
+  slots.getRange(1, 1, 1, 12).setValues([[
     'slot_id', 'date', 'start_time', 'end_time', 'instructor_name',
-    'zoom_link', 'year_month', 'period', 'max_capacity', 'current_count'
+    'zoom_link', 'zoom_id', 'zoom_passcode', 'year_month', 'period', 'max_capacity', 'current_count'
   ]]);
 
   var bookings = ss.getSheetByName('bookings');
@@ -453,7 +469,7 @@ function setupSheets() {
 
   var instructors = ss.getSheetByName('instructors');
   if (!instructors) { instructors = ss.insertSheet('instructors'); }
-  instructors.getRange(1, 1, 1, 3).setValues([[
-    'instructor_id', 'name', 'zoom_link'
+  instructors.getRange(1, 1, 1, 5).setValues([[
+    'instructor_id', 'name', 'zoom_link', 'zoom_id', 'zoom_passcode'
   ]]);
 }

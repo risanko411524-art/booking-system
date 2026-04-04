@@ -29,7 +29,7 @@ export default function NewSlotPage() {
     try {
       const res = await fetch("/api/slots", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ date, start_time: startTime, end_time: endTime, instructor_name: instructor.name, zoom_link: instructor.zoom_link, period, max_capacity: maxCapacity }),
+        body: JSON.stringify({ date, start_time: startTime, end_time: endTime, instructor_name: instructor.name, zoom_link: instructor.zoom_link, zoom_id: instructor.zoom_id || '', zoom_passcode: instructor.zoom_passcode || '', period, max_capacity: maxCapacity }),
       });
       if (!res.ok) { const data = await res.json(); setError(data.error || "作成に失敗しました"); return; }
       router.push("/admin/slots");

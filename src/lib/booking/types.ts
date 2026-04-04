@@ -5,6 +5,8 @@ export interface Slot {
   end_time: string; // HH:mm
   instructor_name: string;
   zoom_link: string;
+  zoom_id: string;
+  zoom_passcode: string;
   year_month: string; // YYYY-MM
   period: "week2" | "week4";
   max_capacity: number;
@@ -26,6 +28,8 @@ export interface Instructor {
   instructor_id: string;
   name: string;
   zoom_link: string;
+  zoom_id: string;
+  zoom_passcode: string;
 }
 
 export interface BookingFormData {

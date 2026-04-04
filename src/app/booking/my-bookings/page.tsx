@@ -125,11 +125,19 @@ export default function MyBookingsPage() {
                   </span>
                 </div>
                 {booking.status === "active" && slot?.zoom_link && (
-                  <a href={slot.zoom_link} target="_blank" rel="noopener noreferrer"
-                    className="block text-center font-extrabold rounded-full py-2.5 mt-3 shadow-md transition-all hover:scale-105"
-                    style={{ background: "var(--gradient)", color: "#ffffff" }}>
-                    ここから参加する
-                  </a>
+                  <>
+                    <a href={slot.zoom_link} target="_blank" rel="noopener noreferrer"
+                      className="block text-center font-extrabold rounded-full py-2.5 mt-3 shadow-md transition-all hover:scale-105"
+                      style={{ background: "var(--gradient)", color: "#ffffff" }}>
+                      ここから参加する
+                    </a>
+                    {(slot.zoom_id || slot.zoom_passcode) && (
+                      <div className="rounded-xl p-2.5 mt-2 text-sm" style={{ background: "var(--accent-light)", border: "2px solid var(--accent)" }}>
+                        {slot.zoom_id && <p className="font-bold" style={{ color: "var(--text)" }}>Zoom ID: <span className="font-extrabold">{slot.zoom_id}</span></p>}
+                        {slot.zoom_passcode && <p className="font-bold" style={{ color: "var(--text)" }}>パスコード: <span className="font-extrabold">{slot.zoom_passcode}</span></p>}
+                      </div>
+                    )}
+                  </>
                 )}
                 {canCancel && (
                   <button onClick={() => handleCancel(booking.booking_id)}
