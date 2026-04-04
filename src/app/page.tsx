@@ -107,6 +107,10 @@ export default function Home() {
                   <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
                   <span>予約後すぐに<strong className="font-extrabold" style={{ color: "var(--text)" }}>Zoomリンク</strong>が表示されます</span>
                 </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
+                  <span><strong className="font-extrabold" style={{ color: "var(--text)" }}>当日でも空き枠があれば予約可能</strong>です</span>
+                </li>
               </ul>
             </div>
             <div className="rounded-2xl p-6 shadow-md" style={{ background: "var(--bg)", border: "3px solid var(--border)" }}>
