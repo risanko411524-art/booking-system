@@ -78,6 +78,94 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 予約・キャンセルの注意点 */}
+      <section className="py-16 px-6" style={{ background: "#ffffff" }}>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-extrabold text-center mb-12" style={{ color: "var(--text)" }}>
+            予約・キャンセルの
+            <span style={{ color: "var(--primary)" }}>ルール</span>
+          </h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="rounded-2xl p-6 shadow-md" style={{ background: "var(--bg)", border: "3px solid var(--border)" }}>
+              <h3 className="font-extrabold text-lg mb-4 flex items-center gap-2" style={{ color: "var(--primary-dark)" }}>
+                <span className="text-2xl">&#128197;</span> 予約について
+              </h3>
+              <ul className="space-y-3 text-sm" style={{ color: "var(--text-muted)" }}>
+                <li className="flex items-start gap-2">
+                  <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
+                  <span>1回目・2回目からそれぞれ<strong className="font-extrabold" style={{ color: "var(--text)" }}>1人1枠まで</strong>予約OK</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
+                  <span>1枠の定員は<strong className="font-extrabold" style={{ color: "var(--text)" }}>最大12名</strong></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
+                  <span>メールアドレス・名前・部屋名を入力するだけ</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
+                  <span>予約後すぐに<strong className="font-extrabold" style={{ color: "var(--text)" }}>Zoomリンク</strong>が表示されます</span>
+                </li>
+              </ul>
+            </div>
+            <div className="rounded-2xl p-6 shadow-md" style={{ background: "var(--bg)", border: "3px solid var(--border)" }}>
+              <h3 className="font-extrabold text-lg mb-4 flex items-center gap-2" style={{ color: "var(--primary-dark)" }}>
+                <span className="text-2xl">&#128260;</span> キャンセルについて
+              </h3>
+              <ul className="space-y-3 text-sm" style={{ color: "var(--text-muted)" }}>
+                <li className="flex items-start gap-2">
+                  <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
+                  <span>キャンセルは<strong className="font-extrabold" style={{ color: "var(--text)" }}>開催前日まで</strong>可能</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
+                  <span><strong className="font-extrabold" style={{ color: "var(--text)" }}>当日のキャンセルは不可</strong>です</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
+                  <span>キャンセル後は別の枠に<strong className="font-extrabold" style={{ color: "var(--text)" }}>再予約OK</strong></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-extrabold text-lg" style={{ color: "var(--accent)" }}>&#10003;</span>
+                  <span>「予約確認」ページからいつでもキャンセルできます</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Zoomリンク確認方法 */}
+          <div className="mt-6 rounded-2xl p-6 shadow-md" style={{ background: "var(--accent-light)", border: "3px solid var(--accent)" }}>
+            <h3 className="font-extrabold text-lg mb-4 flex items-center gap-2" style={{ color: "var(--text)" }}>
+              <span className="text-2xl">&#128187;</span> 参加Zoomリンクの確認方法
+            </h3>
+            <div className="grid gap-4 sm:grid-cols-3 text-sm">
+              <div className="flex items-start gap-3">
+                <span className="font-extrabold text-xl rounded-full w-8 h-8 flex items-center justify-center shrink-0" style={{ background: "var(--primary)", color: "#ffffff" }}>1</span>
+                <div>
+                  <p className="font-extrabold" style={{ color: "var(--text)" }}>予約完了時</p>
+                  <p style={{ color: "var(--text-muted)" }}>予約後の完了画面にZoomリンク・ID・パスコードが表示されます</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="font-extrabold text-xl rounded-full w-8 h-8 flex items-center justify-center shrink-0" style={{ background: "var(--primary)", color: "#ffffff" }}>2</span>
+                <div>
+                  <p className="font-extrabold" style={{ color: "var(--text)" }}>予約確認ページ</p>
+                  <p style={{ color: "var(--text-muted)" }}>メールアドレスを入力すると、いつでもZoomリンクを再確認できます</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="font-extrabold text-xl rounded-full w-8 h-8 flex items-center justify-center shrink-0" style={{ background: "var(--primary)", color: "#ffffff" }}>3</span>
+                <div>
+                  <p className="font-extrabold" style={{ color: "var(--text)" }}>ワンクリック参加</p>
+                  <p style={{ color: "var(--text-muted)" }}>「ここから参加する」ボタンで直接Zoomに入れます</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How it works */}
       <section className="py-16 px-6" style={{ background: "var(--bg2)" }}>
         <div className="max-w-4xl mx-auto">
